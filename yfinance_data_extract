@@ -1,0 +1,24 @@
+import pandas as pd_stock_data
+import yfinance as yf
+import matplotlib.pyplot as plt
+
+# Specify the stock/^index symbol and time range
+
+symbol = ["^NSEI"]  
+start_date = "2022-01-01"
+end_date = "2023-01-01"
+
+# Download historical data from Yahoo Finance
+pd_stock_data = yf.download(symbol, start=start_date, end=end_date)
+
+# Print the first few rows of the data
+print(pd_stock_data.head())
+
+#Save to csv file 
+pd_stock_data.to_csv("NSEI.csv")
+
+# Plotting the closing prices
+pd_stock_data['Close'].plot(title=f'{symbol} Stock Price')
+plt.xlabel('Date')
+plt.ylabel('Closing Price (INR)')
+plt.show()
