@@ -1,0 +1,31 @@
+#pip install -U scikit-learn
+import sklearn
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+import seaborn as sns
+from sklearn import preprocessing
+
+print(np.__version__)
+print(sklearn.__version__)
+
+titanic_train_df = pd.read_csv('Datasets/Kaggle_titanic_train.csv')
+titanic_train_df.head(10)
+titanic_train_df.shape
+titanic_train_df.drop(['PassengerId', 'Name', 'Ticket', 'Cabin'], 'columns', inplace = True)
+titanic_train_df.head(10)
+titanic_train_df[titanic_train_df.isnull().any(axis=1)].count()
+titanic_train_df = titanic_train_df.dropna()
+titanic_train_df.shape
+titanic_train_df.describe()
+plt.scatter(titanic_train_df['Age'], titanic_train_df['Survived'])
+plt.xlabel('Age')
+plt.ylabel('Survived')
+pd.crosstab(titanic_train_df['Sex'],titanic_train_df['Survived'])
+pd.crosstab(titanic_train_df['Pclass'],titanic_train_df['Survived'])
+titanic_train_corr = titanic_train_df.corr()
+titanic_train_corr
+sns.heatmap(titanic_train_corr, annot= True)
+label_encoding = preprocessing.LabelEncoder()
+titanic_train_df['Sex'] = label_encoding.fit_transform(titanic_train_df['Sex'].astype(str))
+titanic_train_df.head()
