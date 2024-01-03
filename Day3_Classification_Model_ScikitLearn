@@ -1,31 +1,114 @@
-#pip install -U scikit-learn
+# Install scikit-learn
+# !pip install -U scikit-learn
+
+# Import necessary libraries
 import sklearn
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
 from sklearn import preprocessing
+from sklearn.model_selection import train_test_split
+from sklearn.linear_model import LogisticRegression
+from sklearn.metrics import accuracy_score, precision_score, recall_score
 
-print(np.__version__)
-print(sklearn.__version__)
+# Check and print library versions
+print("NumPy version:", np.__version__)
+print("scikit-learn version:", sklearn.__version__)
 
+# Load Titanic training dataset
 titanic_train_df = pd.read_csv('Datasets/Kaggle_titanic_train.csv')
+
+# Display the first 10 rows of the dataset
 titanic_train_df.head(10)
+
+# Display the shape of the dataset
 titanic_train_df.shape
-titanic_train_df.drop(['PassengerId', 'Name', 'Ticket', 'Cabin'], 'columns', inplace = True)
+
+# Drop unnecessary columns
+titanic_train_df.drop(['PassengerId', 'Name', 'Ticket', 'Cabin'], 'columns', inplace=True)
+
+# Display the first 10 rows after dropping columns
 titanic_train_df.head(10)
+
+# Display the count of rows with at least one missing value
 titanic_train_df[titanic_train_df.isnull().any(axis=1)].count()
+
+# Drop rows with missing values
 titanic_train_df = titanic_train_df.dropna()
+
+# Display the shape of the dataset after dropping missing values
 titanic_train_df.shape
+
+# Display descriptive statistics
 titanic_train_df.describe()
+
+# Create a scatter plot
 plt.scatter(titanic_train_df['Age'], titanic_train_df['Survived'])
 plt.xlabel('Age')
 plt.ylabel('Survived')
-pd.crosstab(titanic_train_df['Sex'],titanic_train_df['Survived'])
-pd.crosstab(titanic_train_df['Pclass'],titanic_train_df['Survived'])
+
+# Create a cross-tabulation of 'Sex' and 'Survived'
+pd.crosstab(titanic_train_df['Sex'], titanic_train_df['Survived'])
+
+# Create a cross-tabulation of 'Pclass' and 'Survived'
+pd.crosstab(titanic_train_df['Pclass'], titanic_train_df['Survived'])
+
+# Calculate correlation matrix
 titanic_train_corr = titanic_train_df.corr()
-titanic_train_corr
-sns.heatmap(titanic_train_corr, annot= True)
+
+# Display the correlation matrix using a heatmap
+sns.heatmap(titanic_train_corr, annot=True)
+
+# Label encoding for 'Sex' column
 label_encoding = preprocessing.LabelEncoder()
 titanic_train_df['Sex'] = label_encoding.fit_transform(titanic_train_df['Sex'].astype(str))
+
+# Display the first few rows after label encoding
 titanic_train_df.head()
+
+# Load preprocessed Titanic dataset
+titanic_df = pd.read_csv('Datasets/titanic_preprocessed.csv')
+
+# Display the first few rows of the preprocessed dataset
+titanic_df.head()
+
+# Display the shape of the preprocessed dataset
+titanic_df.shape
+
+# Split the dataset into training and testing sets
+X = titanic_df.drop('Survived', axis=1)
+Y = titanic_df['Survived']
+x_train, x_test, y_train, y_test = train_test_split(X, Y, test_size=0.2)
+
+# Display the shapes of training and testing sets
+x_train.shape
+x_test.shape
+
+# Build a logistic regression model
+logistic_reg_model = LogisticRegression(penalty='l2', C=1.0, solver='liblinear').fit(x_train, y_train)
+
+# Make predictions on the testing set
+y_pred = logistic_reg_model.predict(x_test)
+
+# Create a DataFrame with actual and predicted values
+pred_results = pd.DataFrame({'y_test': y_test, 'y_pred': y_pred})
+
+# Display the first few rows of the DataFrame
+pred_results.head()
+
+# Create a cross-tabulation of predicted and actual values
+titanic_crosstab = pd.crosstab(pred_results.y_pred, pred_results.y_test)
+
+# Display the cross-tabulation
+titanic_crosstab
+
+# Evaluate model performance
+acc = accuracy_score(y_test, y_pred)
+prec = precision_score(y_test, y_pred)
+recall = recall_score(y_test, y_pred)
+
+# Print evaluation metrics
+print("Accuracy:", acc)
+print("Precision:", prec)
+print("Recall:", recall)
