@@ -1,0 +1,16 @@
+# String Formatting
+a = "Hello World"
+b = "Program"
+number = 40
+
+txt = "This is again a for the {0}th times"  # 0 is the parameter for the index in format function 
+
+print(a[2:5])  # from 2nd index till 5th index but 5th not included
+print(a[:5])  # from starting till 5th index but 5th not included
+print(a[2:])  # from 2nd position till end
+print(a[:-1])  # -1 is the last character, so leaving -1 prints all characters
+print(a[-5:-2])  # -2 not included
+print(a.lower())
+print(a.upper())
+print(a + " " + b)  # String concatenation0
+print(txt.format(number))
