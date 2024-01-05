@@ -1,0 +1,39 @@
+# Python Lists
+
+fruits_list = ["Apple", "Banana", "Mango"]
+mixed_list = ["abc", 34, True, 40, "male"]
+
+# Print the entire fruits_list
+print(fruits_list)
+
+# Access the first element of fruits_list
+print(fruits_list[0])
+
+# Print a slice of the fruits_list
+print(fruits_list[:3])
+
+# Print the length of fruits_list
+print(len(fruits_list))
+
+# Print the mixed_list
+print(mixed_list)
+
+# Print the data type of fruits_list and mixed_list
+print(type(fruits_list))
+print(type(mixed_list))
+
+# Create a new list using the list() constructor
+new_list = list(("Apple", "Banana", "Mango"))
+print(new_list)
+
+# Check if "Mango" is in the new_list
+if "Mango" in new_list:
+    print('Mango is in the list')
+
+# Update the first element in new_list
+new_list[0] = 'Cherry'
+print(new_list)
+
+# Insert "Watermelon" at index 1 in new_list
+new_list.insert(1, "Watermelon")
+print(new_list)
