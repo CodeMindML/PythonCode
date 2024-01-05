@@ -34,6 +34,7 @@ if "Mango" in new_list:
 new_list[0] = 'Cherry'
 print(new_list)
 
-# Insert "Watermelon" at index 1 in new_list
+# Insert "Watermelon" at index 1 in new_list and append at end
 new_list.insert(1, "Watermelon")
+new_list.append("Orange")
 print(new_list)
