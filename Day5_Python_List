@@ -38,3 +38,10 @@ print(new_list)
 new_list.insert(1, "Watermelon")
 new_list.append("Orange")
 print(new_list)
+
+#Remove a specific item from list
+new_list.remove("Orange")
+new_List.pop(1)
+new_List.pop() #remove last element
+del new_List #Delete the list
+new_List.clear() # Clear the list
