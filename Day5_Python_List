@@ -45,3 +45,13 @@ new_List.pop(1)
 new_List.pop() #remove last element
 del new_List #Delete the list
 new_List.clear() # Clear the list
+
+#Reverse a list
+list1 = [2, 5, 6, 8, 1, 8, 9, 11]
+list1.sort(reverse=True)
+print(list1)
+
+#Sort a list
+list1 = [2, 5, 6, 8, 1, 8, 9, 11]
+list2 = list1.sort(reverse=True)
+print(list2)
