@@ -16,3 +16,18 @@ print(merged_names)
 print(len(merged_names))
 toDict = dict(name = "John", age = 36, country = "Norway")
 print(toDict)
+
+car = {
+"brand": "Ford",
+"model": "EcoSport",
+"year": 2023
+}
+
+x = car.keys()
+y = car.values()
+
+print(x,y) #before the change
+
+car["color"] = "white"
+
+print(x) #after the change
