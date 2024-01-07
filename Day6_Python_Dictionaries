@@ -1,4 +1,6 @@
 # Merging Dictionaries
+#Dictionaries are changeable, meaning that we can change, add or remove items after the dictionary has been created.
+#Does not allow duplicates.
 
 # Using the | operator
 names_1 = {"Kelly": 23, "Derick": 14, "John": 7}
@@ -11,3 +13,6 @@ names_1 = {"Kelly": 23, "Derick": 14, "John": 7}
 names_2 = {"Ravi": 45, "Mpho": 67}
 merged_names = {**names_1, **names_2}
 print(merged_names)
+print(len(merged_names))
+toDict = dict(name = "John", age = 36, country = "Norway")
+print(toDict)
