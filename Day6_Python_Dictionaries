@@ -1,0 +1,13 @@
+# Merging Dictionaries
+
+# Using the | operator
+names_1 = {"Kelly": 23, "Derick": 14, "John": 7}
+names_2 = {"Ravi": 45, "Mpho": 67}
+merged_names = names_1 | names_2
+print(merged_names)
+
+# Using the ** unpacking operator
+names_1 = {"Kelly": 23, "Derick": 14, "John": 7}
+names_2 = {"Ravi": 45, "Mpho": 67}
+merged_names = {**names_1, **names_2}
+print(merged_names)
