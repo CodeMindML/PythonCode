@@ -1,0 +1,12 @@
+# Tuple: An ordered, unchangeable collection that allows duplicate values.
+
+# Creating a tuple and printing it
+fruit_tuple = ("apple", "banana", "cherry")
+print(fruit_tuple)
+
+# Printing the length of the tuple
+print(len(fruit_tuple))
+
+# Creating a tuple using the tuple() constructor and printing it
+another_tuple = tuple(("apple", "banana", "cherry"))  # Note the double round-brackets
+print(another_tuple)
