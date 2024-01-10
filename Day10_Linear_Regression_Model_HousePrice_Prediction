@@ -1,0 +1,87 @@
+import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
+from sklearn.model_selection import train_test_split
+from sklearn.linear_model import LinearRegression
+from sklearn.metrics import r2_score
+from sklearn.preprocessing import StandardScaler
+
+# Load dataset
+houseprice_df = pd.read_excel('HousePrice_Dataset.xlsx')
+
+# Display the first few rows and shape of the dataset
+print(houseprice_df.head())
+print(houseprice_df.shape)
+
+# Check for missing values and drop rows with NaN values
+missing_rows = houseprice_df[houseprice_df.isnull().any(axis=1)]
+print(f"Number of rows with missing values: {missing_rows.shape[0]}")
+houseprice_df = houseprice_df.dropna()
+
+# Display summary statistics and data types
+print(houseprice_df.describe())
+print(houseprice_df.dtypes)
+
+# Convert categorical variable 'ocean_proximity' into dummy/indicator variables
+houseprice_df = pd.get_dummies(houseprice_df, columns=['ocean_proximity'])
+
+# Shuffle the dataset
+houseprice_df = houseprice_df.sample(frac=1).reset_index(drop=True)
+
+# Save the processed dataset to a CSV file
+houseprice_df.to_csv('HousePrice_Processed.csv', index=False)
+
+# Read the processed dataset
+houseprice_df = pd.read_csv('HousePrice_Processed.csv')
+
+# Visualize correlation matrix
+houseprice_df_corr = houseprice_df.corr()
+fig, ax = plt.subplots(figsize=(12, 10))
+sns.heatmap(houseprice_df_corr, annot=True)
+plt.title('Correlation Matrix')
+
+# Split the data into features (X) and target variable (Y)
+#X = houseprice_df.drop(['median_house_value', 'total_bedrooms', 'households'], axis=1)
+X = houseprice_df.drop(['median_house_value'], axis=1)
+Y = houseprice_df['median_house_value']
+
+# Visualize correlation matrix of features
+X_corr = X.corr()
+fig, ax = plt.subplots(figsize=(12, 10))
+sns.heatmap(X_corr, annot=True)
+plt.title('Feature Correlation Matrix')
+
+# Split the dataset into training and testing sets
+x_train, x_test, y_train, y_test = train_test_split(X, Y, test_size=0.2, random_state=42)
+
+# Standardize features for better performance
+#scaler = StandardScaler()
+#x_train_scaled = scaler.fit_transform(x_train)
+#x_test_scaled = scaler.transform(x_test)
+
+# Train a linear regression model
+houseprice_linear_model = LinearRegression(fit_intercept=False).fit(x_train, y_train)
+
+# Evaluate the model on the training set
+training_score = houseprice_linear_model.score(x_train, y_train)
+print("Training Score:", training_score)
+
+# Make predictions on the testing set
+y_pred = houseprice_linear_model.predict(x_test)
+
+# Evaluate the model on the testing set
+testing_score = r2_score(y_test, y_pred)
+print("Testing Score:", testing_score)
+
+# Create a DataFrame to compare predicted and actual values
+df_pred_actual = pd.DataFrame({'Predicted': y_pred, 'Actual': y_test})
+df_pred_actual.head(10)
+
+# Visualize predicted vs actual values
+plt.figure(figsize=(12, 8))
+plt.plot(y_pred, label='Predicted')
+plt.plot(y_test.values, label='Actual')
+plt.ylabel('Median House Value')
+plt.legend()
+plt.title('Predicted vs Actual Values')
+plt.show()
