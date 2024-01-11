@@ -1,0 +1,42 @@
+import pandas as pd
+import matplotlib.pyplot as plt
+from sklearn.cluster import KMeans
+from sklearn.datasets import make_blobs
+
+# Generate random latitude and longitude data
+np.random.seed(0)
+X, _ = make_blobs(n_samples=300, centers=4, random_state=42, cluster_std=2.0)
+
+# Assuming X is a 2D array where each row is [latitude, longitude]
+# Replace this with your actual data
+
+# Create a DataFrame
+df = pd.DataFrame(X, columns=['Latitude', 'Longitude'])
+
+# Number of clusters
+k = 4
+
+# Creating KMeans instance
+kmeans = KMeans(n_clusters=k)
+
+# Fitting the model
+kmeans.fit(X)
+
+# Predicting the clusters
+df['Cluster'] = kmeans.labels_
+
+# Getting the centroids of clusters
+centroids = pd.DataFrame(kmeans.cluster_centers_, columns=['Latitude', 'Longitude'])
+centroids['Cluster'] = range(k)
+
+# Concatenate centroids to the original DataFrame
+df_with_centroids = pd.concat([df, centroids])
+
+# Plotting the clusters
+plt.scatter(df_with_centroids['Latitude'], df_with_centroids['Longitude'], c=df_with_centroids['Cluster'], cmap='viridis', s=50, alpha=0.5)
+plt.scatter(centroids['Latitude'], centroids['Longitude'], c='red', marker='X', s=200, label='Centroids')
+plt.title('K-Means Clustering of Latitude and Longitude with Centroids')
+plt.xlabel('Latitude')
+plt.ylabel('Longitude')
+plt.legend()
+plt.show()
