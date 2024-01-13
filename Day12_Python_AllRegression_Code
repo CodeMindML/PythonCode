@@ -12,3 +12,23 @@ warnings.simplefilter(action='ignore',category=FutureWarning)
 # Load dataset
 houseprice_df = pd.read_excel('HousePrice_Dataset.xlsx')
 houseprice_df.head()
+
+
+df = houseprice_df.copy()
+df.shape
+df.info()
+df.head()
+df.isnull().sum()
+df.duplicated().sum()
+df = df.dropna()
+
+# Convert categorical variable 'ocean_proximity' into dummy/indicator variables
+df = pd.get_dummies(df, columns=['ocean_proximity'])
+df.rename(columns ={'ocean_proximity_<1H OCEAN' : 'ocean_proximity_LT1H OCEAN'}, inplace = True)
+df.info()
+
+sns.distplot(df['median_house_value'])
+plt.show()
+
+
+
