@@ -1,11 +1,16 @@
 import pandas as pd 
 import numpy as np
 import matplotlib.pyplot as plt 
-from matplotlib.pyplot import figure 
 import seaborn as sns
 from sklearn.metrics import r2_score 
 from sklearn.preprocessing import StandardScaler 
 from sklearn.cluster import KMeans 
+from sklearn.model_selection import train_test_split
+from sklearn.metrics import mean_squared_error, mean_absolute_error, r2_score
+from sklearn.linear_model import LinearRegression
+from sklearn.tree import DecisionTreeRegressor
+from sklearn.ensemble import RandomForestRegressor, AdaBoostRegressor
+from sklearn.model_selection import GridSearchCV, RandomizedSearchCV
 import warnings 
 warnings.simplefilter(action='ignore',category=FutureWarning)
 
@@ -29,6 +34,113 @@ df.info()
 
 sns.distplot(df['median_house_value'])
 plt.show()
+
+sns.barplot(x=houseprice_df['ocean_proximity'],y=houseprice_df['median_house_value'])
+plt.xticks(rotation='vertical')
+plt.show()
+
+houseprice_df['ocean_proximity'].value_counts().plot(kind='bar')
+plt.show()
+
+sns.pairplot(data=df, diag_kind='kde')
+df.corr()['median_house_value']
+sns.heatmap(df.corr())
+sns.distplot(np.log(df['median_house_value']))
+
+df.describe(percentiles=[0.01,0.02,0.03,0.05,0.95,.096,0.97,0.98,0.99]).T
+category_columns = df.dtypes[df.dtypes=='object'].index
+numerical_columns = df.dtypes[df.dtypes!='object'].index
+print(category_columns)
+print(numerical_columns)
+
+X = df.drop('median_house_value', axis = 1)
+Y = np.log(df['median_house_value'])
+print(type(X))
+print(type(Y))
+print(X.shape)
+print(Y.shape)
+
+# Split the dataset into training and testing sets
+x_train, x_test, y_train, y_test = train_test_split(X, Y, test_size=0.2, random_state=42)
+print(x_train.shape)
+print(x_test.shape)
+print(y_train.shape)
+print(y_test.shape)
+
+def model_evaluation(y_test, y_pred):
+    mae = mean_absolute_error(y_test, y_pred)
+    mse = mean_squared_error(y_test, y_pred)
+    rmse = mean_squared_error(y_test, y_pred, squared=False)
+    # r2_scr = r2_score(y_test, y_pred)
+    return {'mae': mae, 'mse': mse, 'rmse': rmse}
+
+def model_instantiation(model, x_train, x_test, y_train, y_test, y_pred, model_name):
+    training_r2 = model.score(x_train, y_train)
+    testing_r2 = model.score(x_test, y_test)
+    eval_return = model_evaluation(y_test, y_pred)
+    result_metric = {
+        'Train_R2': training_r2,
+        'Test_R2': testing_r2,
+        'Test_MSE': eval_return['mse'],
+        'Test_RMSE': eval_return['rmse'],
+        'Test_MAE': eval_return['mae']
+    }
+    result = pd.DataFrame(result_metric, index=[model_name])
+    return result
+linear_reg = LinearRegression()
+linear_reg.fit(x_train, y_train)
+
+y_pred_LR = linear_reg.predict(x_test)
+LR_df = model_instantiation(linear_reg ,x_train,x_test,y_train,y_test,y_pred_LR , 'Linear Regression' )
+LR_df
+
+Decs_Tree = DecisionTreeRegressor(max_depth = 8 , min_samples_leaf =10 , min_samples_split = 10)
+Decs_Tree.fit(x_train, y_train)
+y_pred_DT = Decs_Tree.predict(x_test)
+
+DT_df = model_instantiation(Decs_Tree ,x_train,x_test,y_train,y_test,y_pred_DT , 'DTree_Regression' )
+DT_df
+
+Rand_Forest = RandomForestRegressor(n_estimators=300, max_depth = 10, min_samples_split=12)
+Rand_Forest.fit(x_train, y_train)
+y_pred_RF = Rand_Forest.predict(x_test)
+
+RF_df = model_instantiation(Rand_Forest ,x_train,x_test,y_train,y_test,y_pred_RF , 'RF_Regression' )
+RF_df
+
+Rand_Forest_2 = RandomForestRegressor(n_estimators=300, max_depth = 9, min_samples_split=4)
+Rand_Forest_2.fit(x_train, y_train)
+
+y_pred_RF_2 = Rand_Forest_2.predict(x_test)
+
+RF_df_2 = model_instantiation(Rand_Forest_2 ,x_train,x_test,y_train,y_test,y_pred_RF_2 , 'RF2_Regression' )
+RF_df_2
+
+ada =AdaBoostRegressor(n_estimators = 300, random_state = 10)
+ada.fit(x_train,y_train)
+
+y_pred_ada = ada.predict(x_test)
+
+ada_df = model_instantiation(ada ,x_train,x_test,y_train,y_test,y_pred_ada , 'ADA_Regression' )
+ada_df
+
+from xgboost.sklearn import XGBRegressor
+
+xgboost_1 = XGBRegressor()
+xgboost_1.fit(x_train,y_train)
+
+y_pred_xgboost = xgboost_1.predict(x_test)
+
+# Assuming `model_instantiation` is defined somewhere in your code
+xgboost_df = model_instantiation(xgboost_1, x_train, x_test, y_train, y_test, y_pred_xgboost, 'XGB_Regression')
+xgboost_df
+
+all_results = pd.concat([LR_df,DT_df,RF_df,RF_df_2,ada_df,xgboost_df])
+all_results
+
+
+
+
 
 
 
