@@ -1,0 +1,12 @@
+height = input("Enter you height in cms : \n")
+weight = input("Enter your weight in KG : \n")
+
+height_meters = float(height)/100
+#Coverting to int
+height_float = float(height_meters)
+weight_float = float(weight)
+print(height_meters,height_int, weight_int)
+
+bmi = weight_float / (height_float**2)
+bmi_int = int(bmi)
+print("Your BMI : " +str(bmi_int))
