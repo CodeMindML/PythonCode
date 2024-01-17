@@ -83,3 +83,5 @@ if is_prime(user_input):
 else:
     print(f"{user_input} is not a prime number.")
 
+#Power of parenthesis, this will first evaluate addition as per PEMDASLR (), ** , */ , + -
+print(3 * (3+3) / 3 - 3)
