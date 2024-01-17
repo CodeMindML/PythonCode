@@ -9,4 +9,15 @@ print(height_meters,height_int, weight_int)
 
 bmi = weight_float / (height_float**2)
 bmi_int = int(bmi)
-print("Your BMI : " +str(bmi_int))
+
+if bmi_int <18.5 :
+   print(f"Your BMI is {bmi_int}, you are underweigth")
+elif bmi_int < 25 :
+   print(f"Your BMI is {bmi_int}, you have a normal weight")
+elif bmi_int < 30 :
+   print(f"Your BMI is {bmi_int}, you have a slightly over weight")
+elif bmi_int < 35 :
+   print(f"Your BMI is {bmi_int}, you have a obese")
+else:
+   print(f"Your BMI is {bmi_int}, you have a clinically obese")
+
