@@ -1,0 +1,12 @@
+#Find max of the input 
+max_num = 0
+
+numbers = input().split()
+
+print(numbers)
+
+for num in numbers:
+    num_check = int(num)
+    if num_check > max_num:
+        max_num = num_check
+print(f"Max number : {max_num}")
