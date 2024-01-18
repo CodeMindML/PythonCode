@@ -3,6 +3,10 @@
 fruits_list = ["Apple", "Banana", "Mango"]
 mixed_list = ["abc", 34, True, 40, "male"]
 
+#Loop forward
+for fruit in fruits_list :
+    print(fruit)
+
 # Print the entire fruits_list
 print(fruits_list)
 
