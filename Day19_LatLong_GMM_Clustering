@@ -1,0 +1,34 @@
+from sklearn.mixture import GaussianMixture
+
+# Number of clusters
+k = 4
+
+# Creating GaussianMixture instance
+gmm = GaussianMixture(n_components=k)
+
+# Fitting the model
+gmm.fit(X_copy)
+
+# Predicting the clusters and adding 'Cluster' column to the DataFrame
+X['Cluster'] = gmm.predict(X_copy)
+centroids = pd.DataFrame(gmm.means_, columns=['longitude', 'latitude'])
+
+# Getting the centroids of clusters
+
+centroids['Cluster'] = range(k)
+
+# Concatenate DataFrame with centroids
+df_with_centroids = pd.concat([X, centroids])
+
+# Display results
+print(df_with_centroids.head(100))
+
+
+# Plotting the clusters
+plt.scatter(df_with_centroids['latitude'], df_with_centroids['longitude'], c=df_with_centroids['Cluster'], cmap='viridis', s=50, alpha=0.5)
+plt.scatter(centroids['latitude'], centroids['longitude'], c='red', marker='X', s=200, label='Centroids')
+plt.title('K-Means Clustering of Latitude and Longitude with Centroids')
+plt.xlabel('Latitude')
+plt.ylabel('Longitude')
+plt.legend()
+plt.show()
