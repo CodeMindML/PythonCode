@@ -9,7 +9,6 @@ X, _ = make_blobs(n_samples=300, centers=4, random_state=42, cluster_std=2.0)
 
 # Assuming X is a 2D array where each row is [latitude, longitude]
 # Replace this with your actual data
-
 # Create a DataFrame
 df = pd.DataFrame(X, columns=['Latitude', 'Longitude'])
 
