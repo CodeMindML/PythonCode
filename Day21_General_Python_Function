@@ -16,3 +16,23 @@ try:
 
 except ValueError:
     print("Invalid input. Please enter valid numbers for password length and number of passwords.")
+
+
+#Timer , dynamic display of reducing time. 
+import time
+
+def timer(user_timer):
+    while user_timer >= 0:
+        mins, secs = divmod(user_timer, 60)
+        timer_str = '{:02d}:{:02d}'.format(mins, secs)
+        print(timer_str, end='\r')
+        time.sleep(1)
+        user_timer -= 1
+    print('Countdown complete!')
+
+if __name__ == '__main__':
+    try:
+        user_timer = int(input("Enter a time in seconds: "))
+        timer(user_timer)
+    except ValueError:
+        print("Invalid input. Please enter a valid integer for the timer.")
