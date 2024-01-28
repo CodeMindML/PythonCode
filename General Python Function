@@ -1,0 +1,18 @@
+import random
+import string
+
+def generate_password(pw_length):
+    characters = string.ascii_letters + string.digits + string.punctuation
+    password = ''.join(random.choice(characters) for _ in range(pw_length))
+    return password
+
+try:
+    password_length = int(input("Enter the password length: "))
+    num_passwords = int(input("Enter the number of passwords: "))
+    
+    for _ in range(num_passwords):
+        password = generate_password(password_length)
+        print(password)
+
+except ValueError:
+    print("Invalid input. Please enter valid numbers for password length and number of passwords.")
