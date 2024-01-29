@@ -1,6 +1,74 @@
+# Import necessary libraries
 import numpy as np
-import matplotlib as mpl
 import matplotlib.pyplot as plt
 import cv2
 
+# Load the image using matplotlib
 image = plt.imread("Kaggle/NumberPlate.png")
+
+# Display the shape of the original image
+print("Original Image Shape:", image.shape)
+
+# Display the original image
+plt.imshow(image)
+plt.title("Original Image")
+plt.show()
+
+# Define a kernel for morphological operations (Erosion and Dilation)
+kernel = np.ones((7, 7))
+
+# Apply Erosion to the original image
+image_V2 = cv2.erode(image, kernel)
+
+# Display the shape of the eroded image
+print("Eroded Image Shape:", image_V2.shape)
+
+# Display the eroded image
+plt.imshow(image_V2)
+plt.title("Eroded Image")
+plt.show()
+
+# Apply Dilation to the eroded image
+image_V3 = cv2.dilate(image_V2, kernel)
+
+# Display the shape of the dilated image
+print("Dilation Output Shape:", image_V3.shape)
+
+# Display the dilated image
+plt.imshow(image_V3)
+plt.title("Dilation Output")
+plt.show()
+
+# Apply Erosion and Dilation on the left half of the image
+image_V4 = image.copy()
+image_V4[:, :296] = cv2.dilate(cv2.erode(image_V4[:, :296], kernel), kernel)
+
+# Display the shape of the modified image
+print("Erosion and Dilation Output Shape:", image_V4.shape)
+
+# Display the modified image
+plt.imshow(image_V4)
+plt.title("Erosion and Dilation on Half of the Image Output")
+plt.show()
+
+# Rotate the original image 90 degrees clockwise
+image_V5 = cv2.rotate(image, cv2.ROTATE_90_CLOCKWISE)
+
+# Display the shape of the rotated image
+print("Image Rotation at 90 degrees Shape:", image_V5.shape)
+
+# Display the rotated image
+plt.imshow(image_V5)
+plt.title("Image Rotation at 90 degrees Output")
+plt.show()
+
+# Flip the original image vertically and horizontally
+image_V6 = cv2.flip(image, -1)  # 0: vertical flip, 1: horizontal flip, -1: both
+
+# Display the shape of the flipped image
+print("Image Flipping Output Shape:", image_V6.shape)
+
+# Display the flipped image
+plt.imshow(image_V6)
+plt.title("Image Flipping - Vertical and Horizontal")
+plt.show()
