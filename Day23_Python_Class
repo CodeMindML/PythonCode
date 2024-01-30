@@ -39,3 +39,19 @@ emp_obj2 = Details("Virat", 40)
 # Printing the object (implicitly calls the __str__ method)
 print(emp_obj2)
 # Output: Virat(40)
+
+
+# Try block
+try:
+    # Attempt to get an integer input from the user
+    num = int(input("Enter a number: "))
+# Except block for handling ValueError (non-integer input)
+except ValueError:
+    print("Not an Integer")
+# Else block executed if no exception occurred
+else:
+    print("Integer")
+# Finally block always executed, regardless of whether an exception occurred
+finally:
+    print("Try & Catch concept")
+
