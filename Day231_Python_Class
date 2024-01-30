@@ -1,0 +1,22 @@
+# Class definition
+class emp_Details:
+    # Class attributes (shared among all instances of the class)
+    name = "Virat"
+    address = "Pune"
+    age = 40
+
+    # Method to describe employee details
+    def desc(self):
+        print("My name is ", self.name, "I am from ", self.address, "and my age is ", self.age)
+
+# Object creation
+emp_obj = emp_Details()
+
+# Accessing and printing individual attributes of the object
+print(emp_obj.name)     # Output: Virat
+print(emp_obj.address)  # Output: Pune
+print(emp_obj.age)      # Output: 40
+
+# Calling the method to describe employee details
+emp_obj.desc()
+# Output: My name is Virat I am from Pune and my age is 40
