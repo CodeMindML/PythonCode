@@ -20,3 +20,22 @@ print(emp_obj.age)      # Output: 40
 # Calling the method to describe employee details
 emp_obj.desc()
 # Output: My name is Virat I am from Pune and my age is 40
+
+
+# Class definition
+class Details:
+    # Constructor to initialize object attributes
+    def __init__(self, name, age):
+        self.name = name
+        self.age = age
+
+    # String representation of the object
+    def __str__(self):
+        return f"{self.name}({self.age})"
+
+# Object creation and initialization
+emp_obj2 = Details("Virat", 40)
+
+# Printing the object (implicitly calls the __str__ method)
+print(emp_obj2)
+# Output: Virat(40)
