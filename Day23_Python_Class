@@ -55,3 +55,31 @@ else:
 finally:
     print("Try & Catch concept")
 
+
+class Digits:
+    def __init__(self):
+        self.count = 0
+
+    def __iter__(self):
+        # Return the iterator object (in this case, the object itself)
+        return self
+
+    def __next__(self):
+        if self.count <= 100:
+            x = self.count
+            self.count += 10
+            return x
+        else:
+            # Raise StopIteration when reaching the end
+            raise StopIteration
+
+# Creating an object of the Digits class
+obj_digit = Digits()
+
+# Creating an iterator
+number = iter(obj_digit)
+
+# Iterating through the values using the iterator
+for n in number:
+    print(n)
+
