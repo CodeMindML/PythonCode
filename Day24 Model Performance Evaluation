@@ -1,4 +1,4 @@
-#Metric for CLassification models
+#Evaluation Metric for CLassification models
 
 # Importing necessary functions from scikit-learn metrics module
 from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score, confusion_matrix
@@ -30,3 +30,32 @@ print("Precision:", precision)
 print("Recall:", recall)
 print("F1-Score:", f1)
 print("Confusion Matrix:\n", conf_matrix)
+
+#Evaluation Metric for Regression
+# Importing necessary functions from scikit-learn metrics module
+from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score, median_absolute_error
+
+# Sample actual and predicted values for a regression task
+actual_values = [10, 25, 30, 45, 50]
+predicted_values = [12, 24, 28, 44, 51]
+
+# Computing regression metrics
+
+# Mean Absolute Error (MAE): Average absolute difference between actual and predicted values.
+mae = mean_absolute_error(actual_values, predicted_values)
+
+# Mean Squared Error (MSE): Average of the squared differences between actual and predicted values.
+mse = mean_squared_error(actual_values, predicted_values)
+
+# R-squared (R2): Proportion of the variance in the dependent variable that is predictable from the independent variable.
+r2 = r2_score(actual_values, predicted_values)
+
+# Median Absolute Error (MedAE): Median of the absolute differences between actual and predicted values.
+medae = median_absolute_error(actual_values, predicted_values)
+
+# Displaying the computed regression metrics
+print("Mean Absolute Error:", mae)
+print("Mean Squared Error:", mse)
+print("R-squared:", r2)
+print("Median Absolute Error:", medae)
+
