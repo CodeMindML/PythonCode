@@ -3,8 +3,11 @@ alphabets = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q'
 def encoder(text,shift):
     encode_text = ""
     for letter in text:
-       i = alphabets.index(letter)
-       encode_text += alphabets[i+shift]     
+        if letter != " ":
+           i = alphabets.index(letter)
+           encode_text += alphabets[i+shift] 
+        else:
+            encode_text += letter
     print(f"Encoded message: {encode_text}")
     
 text = input("Enter you message :")
