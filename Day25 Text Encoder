@@ -2,10 +2,14 @@ alphabets = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q'
 
 def encoder(text,shift):
     encode_text = ""
+
     for letter in text:
-        if letter != " ":
-           i = alphabets.index(letter)
-           encode_text += alphabets[i+shift] 
+        if letter in alphabets:
+            i = alphabets.index(letter)
+            position = i + shift
+            if position > 26:
+                position = position % 26                
+            encode_text += alphabets[position] 
         else:
             encode_text += letter
     print(f"Encoded message: {encode_text}")
