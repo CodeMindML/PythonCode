@@ -58,7 +58,7 @@ for student in student_scores:
     
 print(student_grades)
 
-
+##Record management
 country = input() # Add country name
 
 visits = int(input("Input Visit: \n")) # Number of visits
@@ -95,3 +95,32 @@ add_new_country(country, visits, list_of_cities)
  
 print(f"I've been to {travel_log[2]['country']} {travel_log[2]['visits']} times.")
 print(f"My favourite city was {travel_log[2]['cities'][0]}.")
+
+##Bidding code
+from replit import clear 
+bids = {}
+bidding_state = False
+def highest_bidder(bids):
+    highest_bid_price =0
+    winner = ""
+    
+    for bid in bids:
+        bid_price = bids[bid]
+        if bid_price >= highest_bid_price:
+            highest_bid_price = bid_price
+            winner = bid
+    print(f"WInner : {winner} , with bid price of : {highest_bid_price}" )    
+        
+
+while not bidding_state: 
+    name = input("Enter your name \n")
+    price = int(input("Enter the bid price \n"))
+    bids[name] = price
+    
+    bid_continue = input("Are there and other bidders? Y or N \n")
+    if bid_continue == "N":
+        bidding_state = True
+    else:
+        clear()
+highest_bidder(bids)
+print(bids)
