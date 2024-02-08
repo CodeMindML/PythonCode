@@ -1,0 +1,30 @@
+def add (num1, num2):
+    return num1+num2
+
+def diff(num1,num2):
+    return num1-num2
+
+def mul (num1, num2):
+    return num1*num2
+
+def div(num1,num2):
+    return num1/num2
+
+operation = {
+    "+" : add,
+    "-" : diff,
+    "*" : mul,
+    "/" : div   
+}
+
+num1 = int(input("Enter the first number?: \n"))
+num2 = int(input("Enter the second number?: \n"))
+
+for symbol in operation :
+           print(symbol)
+        
+oper_symbol = input("Enter operation you want to perform \ n")
+
+result = operation[oper_symbol]
+answer = result(num1,num2)
+print(answer)
