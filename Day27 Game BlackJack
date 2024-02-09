@@ -1,0 +1,70 @@
+import random
+import os
+
+def deal_card():
+    cards = [11,2,3,4,5,6,7,8,9,10,10,10,10]
+    card = random.choice(cards)
+    return card
+
+def play_game():
+    user_cards = []
+    computer_cards = []
+    is_game_over = False
+
+    for _ in range(2):
+        user_cards.append(deal_card())
+        computer_cards.append(deal_card())
+
+    def calculate_Score(cards):
+        if sum(cards) == 21 and len(cards) == 2:
+            return 0
+        if 11 in cards and sum(cards) >21:
+            cards.remove(11)
+            cards.append(1)  
+        return(sum(cards))
+
+    def compare_scores(user_Score, computer_Score):
+        if user_Score == computer_Score:
+            return "Draw"
+        elif computer_Score ==0:
+            return "Loose, opponent have blackjack"
+        elif user_Score ==0:
+            return "Win with a BlackJack"
+        elif user_Score > 21:
+            return "You went wrong. You lose."
+        elif computer_Score >21:
+            return "oppenent went over. You win"
+        elif user_Score > computer_Score:
+            return " You win"
+        else:
+            return "you lose"
+
+
+    while not is_game_over :
+        user_Score = calculate_Score(user_cards)
+        computer_Score = calculate_Score(computer_cards)
+
+        print(f"Your Card: {user_cards}, current score : {user_Score}")
+        print(f"Your Card: {computer_cards}, current score : {computer_Score}")      
+
+        if user_Score ==0 or computer_Score ==0 or user_Score >21 :
+            is_game_over = True
+        else:
+            user_should_deal = input("Type 'y' to get another card, type n to pass:")
+            if user_should_deal == "y":
+                user_cards.append(deal_card())
+            else:
+                is_game_over = True
+
+
+    while computer_Score !=0 and computer_Score <17:
+        computer_cards.append(deal_card())
+        computer_Score = calculate_Score(computer_cards)
+    print(f"Your Card: {user_cards}, current score : {user_Score}")  
+    print(f"Your Card: {computer_cards}, current score : {computer_Score}")
+    print(compare_scores(user_Score,computer_Score ))
+
+
+while input("Do you want to play a game of Black Jack ? Type 'y' or 'n': ") == "y":
+        os.system('cls')
+        play_game()
