@@ -1,0 +1,33 @@
+import random
+
+print("Welcome to the Number Guessing Game !!")
+print("I am thinking of a number between 1 and 100.")
+
+diff_type = input(("Choose a difficulty. Type 'easy' or 'hard' :"))
+
+if diff_type == 'easy':
+    chance = 10
+elif diff_type == 'hard':
+    chance = 5
+else:
+    print("Choose correct option.")
+
+choice = random.randint(1,100)
+
+time_out = 0
+
+while time_out <= chance:
+    user_choice = int(input("Make a guess:"))
+    if user_choice == choice:
+        print("You Win !!")
+        time_out = chance + 1
+    elif user_choice < choice:  
+        
+        print("Too Low")
+        time_out += 1
+    elif user_choice > choice:
+        print("Too High")
+        time_out +=1
+
+if time_out > chance and user_choice != choice:
+    print("You Lost !! Chance Exhausted !!")
