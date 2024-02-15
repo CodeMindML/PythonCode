@@ -1,0 +1,19 @@
+#Class definition
+class Question :
+    def __init__(self,text,answer):
+        self.text = text
+        self.answer = answer
+
+#Object Creation , question data file contains a list of dictionari ietms of text = Question & answer is correct answer T or F
+from question_model import Question
+from data import question_data
+
+question_bank = []
+
+for question in question_data:
+    ques_text = question["text"]
+    ques_ans = question["answer"]
+    new_question = Question(ques_text,ques_ans)
+    question_bank.append(new_question)
+
+print(question_bank[0].text)
