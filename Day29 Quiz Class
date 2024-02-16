@@ -4,6 +4,8 @@ class Question :
         self.text = text
         self.answer = answer
 
+
+
 #Main.py Object Creation , question data file contains a list of dictionari ietms of text = Question & answer is correct answer T or F
 from question_model import Question
 from data import question_data
@@ -20,6 +22,12 @@ for question in question_data:
 quiz = QuizBrain(question_bank)
 while quiz.still_has_questions():
     quiz.next_question()
+    
+
+print("You've completed the quiz !!")
+print(f"Your total score : {quiz.score} out of {quiz.question_number}")
+
+
 
 #Brain Quiz Class
 class QuizBrain:
@@ -39,6 +47,7 @@ class QuizBrain:
             print("That's Wrong !!")
         print(f"The correct answer was : {correct_answer}.")
         print(f"Your current score is: {self.score}/{self.question_number}")
+        print("\n")
 
     def next_question(self):
         current_question = self.question_list[self.question_number]
