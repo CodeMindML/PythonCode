@@ -8,7 +8,7 @@ timmy_the_turtle.shape("turtle")
 timmy_the_turtle.color("red")
 
 directions = [0, 90, 180, 270]
-timmy_the_turtle.pensize(15)
+timmy_the_turtle.pensize(5)
 timmy_the_turtle.speed("fastest")
 
 for _ in range(15):
@@ -37,7 +37,13 @@ for step in range(200):
     timmy_the_turtle.color(randon_color())
     timmy_the_turtle.forward(30)
     timmy_the_turtle.setheading(random.choice(directions))
+def draw_spirograph(size_of_graph):
+    for _ in range(int(360/size_of_graph)):
+        timmy_the_turtle.color(randon_color())
+        timmy_the_turtle.circle(100)
+        timmy_the_turtle.setheading(timmy_the_turtle.heading()+size_of_graph)
 
+draw_spirograph(5)
 
 screen = Screen()
 screen.exitonclick()
