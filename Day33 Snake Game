@@ -102,6 +102,8 @@ class Snake:
         self.add_segment(self.segments[-1].position())
 
 
+
+
 #Class 3: Food class
 from turtle import  Turtle
 import random
@@ -120,6 +122,8 @@ class Food(Turtle):
         x = random.randint(-280, 280)
         y = random.randint(-280, 280)
         self.goto(x, y)
+
+
 
 #Class 4: Scoreboard Class
 from turtle import Turtle
