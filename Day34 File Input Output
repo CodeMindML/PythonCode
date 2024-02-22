@@ -1,7 +1,13 @@
-#file needs to be in the same directory. R+ mode helps in read and write both.
-with open("my_file.txt", mode="r+") as file:
-    contents = file.read()
-    file.write("\nLives in Pune")
-    content = file.read()
-    print(contents)
-    print(content)
+#Main.py to open file with names  & letters and generate email for each person
+PLACEHOLDER = "[name]"
+
+with open("./Input/Names/invited_names.txt") as names_file:
+    names = names_file.readlines()
+
+with open("./Input/Letters/starting_letter.txt") as letter_file:
+    letter_contents = letter_file.read()
+    for name in names:
+        stripped_name = name.strip()
+        new_letter = letter_contents.replace(PLACEHOLDER, stripped_name)
+        with open(f"./Output/ReadyToSend/letter_for_{stripped_name}.txt", mode="w") as completed_letter:
+            completed_letter.write(new_letter)
