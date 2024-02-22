@@ -11,3 +11,24 @@ with open("./Input/Letters/starting_letter.txt") as letter_file:
         new_letter = letter_contents.replace(PLACEHOLDER, stripped_name)
         with open(f"./Output/ReadyToSend/letter_for_{stripped_name}.txt", mode="w") as completed_letter:
             completed_letter.write(new_letter)
+
+
+#Reading a CSV via pandas and writing to another CSV with limited data
+import pandas
+
+data = pandas.read_csv("2018_Central_Park_Squirrel_Census_-_Squirrel_Data.csv")
+grey_squ_count = len(data[data["Primary Fur Color"] == "Gray"])
+black_squ_count = len(data[data["Primary Fur Color"] == "Black"])
+red_squ_count = len(data[data["Primary Fur Color"] == "Cinnamon"])
+print(grey_squ_count)
+print(black_squ_count)
+print(red_squ_count)
+
+data_dic = {
+    "Fur_Color" : ["Gray", "Cinnamon", "Black"],
+    "Count" : [grey_squ_count,red_squ_count,black_squ_count]
+}
+
+df = pandas.DataFrame(data_dic)
+df.to_csv("squirrel_count.csv")
+print(df)
