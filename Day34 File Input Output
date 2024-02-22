@@ -1,0 +1,7 @@
+#file needs to be in the same directory. R+ mode helps in read and write both.
+with open("my_file.txt", mode="r+") as file:
+    contents = file.read()
+    file.write("\nLives in Pune")
+    content = file.read()
+    print(contents)
+    print(content)
