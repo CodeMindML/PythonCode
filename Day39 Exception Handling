@@ -1,5 +1,18 @@
 import json
 
+#searching jason file
+def search_web():
+    website = input("ENter website to search:\n")
+    try:
+        with open("data.json", "r") as data_file:
+            data = json.load(data_file)
+    except FileNotFoundError:
+        print("Unable to open data.jason file")
+    else:
+        if website in data:
+            email = data[website]["email"]
+            password = data[website]["password"]
+            print(f"{website} recorded email is {email} and its password is {password}")
 
 website = input("Enter website:\n")
 email = input("Enter email:\n")
@@ -12,14 +25,15 @@ new_data = {
     }
 
 try:
-    with open("data.json", "r") as data_file:
-        data = json.load(data_file)
+        with open("data.json", "r") as data_file:
+            data = json.load(data_file)
 except:
-    with open("data.json", "w") as data_file:
-        json.dump(new_data, data_file, indent=4)
+        with open("data.json", "w") as data_file:
+            json.dump(new_data, data_file, indent=4)
 else:
-    data.update(new_data)
-    with open("data.json", "w") as data_file:
-        json.dump(data, data_file, indent=4)
+        data.update(new_data)
+        with open("data.json", "w") as data_file:
+            json.dump(data, data_file, indent=4)
 finally:
-    print("Updated Json file with details!!")
+        print("Updated Json file with details!!")
+        search_web()
